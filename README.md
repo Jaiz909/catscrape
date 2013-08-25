@@ -7,6 +7,7 @@ pull images from an imgur album into a new directory, preserving the order of th
 
 Usage
 --------
+```
 usage: catscrape.py [-h] -a ALBUM [-o OUTDIR] [-n NUMTHREADS]
 
 optional arguments:
@@ -15,4 +16,4 @@ optional arguments:
   -o OUTDIR      The directory to save images to. Defaults to the album id in
                  the current working directory.
   -n NUMTHREADS  The number of threads to use for downloading. Default=10.
-
+```
