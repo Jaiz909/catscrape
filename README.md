@@ -1,7 +1,9 @@
 catscrape
 =========
 
-Downloads albums from imgur.com
+Multithreaded imgur album downloader. The imgur album download link compiles a zip archive and seems to take a long time
+on some albums. The download link usually doesn't preserve the order of the original album. This simple script will quickly
+pull images from an imgur album into a new directory, preserving the order of the album.
 
 Usage
 --------
