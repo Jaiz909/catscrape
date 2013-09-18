@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 Author: Jai Grimshaw <jai@jaigrimshaw.com>
-Date: 20131724
+Date: 20130724
 Filename: catscrape.py
 """
 
