@@ -50,7 +50,7 @@ class ImgurDownloader:
                 logger.info('Enumerating album.')
 		#Grab the noscript version of the URL
 		album = urllib2.urlopen('http://imgur.com/a/%s/noscript' % albumId)
-                logger.info('Downloaded album: \'%s\'', albumId)
+                logger.info('Downloaded HTML for album: \'%s\'', albumId)
 		albumHTML = album.read()
 		#NEVER USE REGEX TO PARSE HTML. THIS WILL SUMMON LUCIFER HIMSELF.
                 logger.info('Searching for images.')
@@ -74,11 +74,9 @@ class ImgurDownloader:
 
 	def downloadImage(self):
 		#grab an image from the list until we can't.
-                logger.info('Downloading images.')
 		try:
 			while True:
 				image = self.images.pop()
-                                logger.info('Downloading image: \'%s\'', image['filename'])
 				imageLoc = image['location']
 				imageURL = image['url']
                                 logger.info('Downloading: %s' % (imageURL))
@@ -90,6 +88,7 @@ class ImgurDownloader:
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
         parser.add_argument('-d', dest='debug', action='store_true', help='Enable debugging output', default=False, required=False)
+        parser.add_argument('-q', dest='quiet', action='store_true', help='Enable quiet mode', default=False, required=False)
 	parser.add_argument('-a', dest='album', help='The imgur album url to download images from.', required=True)
 	parser.add_argument('-o', dest='outdir', help='The directory to save images to. Defaults to the album id in the current working directory.', default='.', required=False)
 	parser.add_argument('-n', dest='numthreads', help='The number of threads to use for downloading. Default=10.', type=int, default=10, required=False)
@@ -98,6 +97,10 @@ if __name__ == '__main__':
         logger.addHandler(logging.StreamHandler())
         if args.debug:
                 logger.setLevel(logging.DEBUG)
+        elif args.quiet:
+                logger.setLevel(logging.CRITICAL)
+        else:
+                logger.setLevel(logging.INFO)
 
 
         logger.debug('Constructing downloader.')
