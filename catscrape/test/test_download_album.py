@@ -5,7 +5,7 @@ import os
 import os.path
 import sys
 sys.path.append('..')
-import catscrape
+from catscrape.imgurdownloader import ImgurDownloader as ImgurDownloader
 
 class TestAlbumDownload(unittest.TestCase):
         def setUp(self):
@@ -18,7 +18,7 @@ class TestAlbumDownload(unittest.TestCase):
 
 
         def testDiscovery(self):
-                i = catscrape.ImgurDownloader(savePath=tempfile.mkdtemp())
+                i = ImgurDownloader(savePath=tempfile.mkdtemp())
                 i.enumerateAlbum(albumId=self.albumID)
                 notFound = self.expectedFiles
 
@@ -34,7 +34,7 @@ class TestAlbumDownload(unittest.TestCase):
 
         def testDownload(self):
                 downloadDir = tempfile.mkdtemp()
-                i = catscrape.ImgurDownloader(savePath=downloadDir)
+                i = ImgurDownloader(savePath=downloadDir)
                 i.downloadAlbum(url=self.albumURL)
 
                 albumPath = os.path.join(downloadDir, self.albumID)
