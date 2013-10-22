@@ -6,8 +6,12 @@ Filename: catscrape.py
 """
 
 import threading
-import urllib2
-import urllib
+import sys
+if sys.version_info > (3, 0):
+        import urllib.request, urllib.error, urllib.parse
+else:
+        import urllib
+        import urllib2
 import re
 import os
 import os.path
@@ -54,7 +58,10 @@ class ImgurDownloader:
         def enumerateAlbum(self, albumId):
                 logger.info('Enumerating album.')
                 #Grab the noscript version of the URL
-                album = urllib2.urlopen('http://imgur.com/a/%s/noscript' % albumId)
+                if sys.version_info > (3, 0):
+                        album = urllib.request.urlopen('http://imgur.com/a/%s/noscript' % albumId)
+                else:
+                        album = urllib2.urlopen('http://imgur.com/a/%s/noscript' % albumId)
                 logger.info('Downloaded HTML for album: \'%s\'', albumId)
                 albumHTML = album.read()
                 soup = BeautifulSoup(albumHTML)
@@ -99,7 +106,10 @@ class ImgurDownloader:
                                 imageURL = image['url']
                                 logger.info('Downloading: %s' % (imageURL))
                                 imageFilename = image['filename']
-                                urllib.urlretrieve(imageURL, os.path.join(self.albumPath, '%d_%s' % (imageLoc, imageFilename)))
+                                if sys.version_info > (3, 0):
+                                        urllib.request.urlretrieve(imageURL, os.path.join(self.albumPath, '%d_%s' % (imageLoc, imageFilename)))
+                                else:
+                                        urllib.urlretrieve(imageURL, os.path.join(self.albumPath, '%d_%s' % (imageLoc, imageFilename)))
                 except IndexError:
                         return
 
