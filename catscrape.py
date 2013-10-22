@@ -47,6 +47,8 @@ class ImgurDownloader:
 
 		for thread in self.threads:
 			thread.start()
+                for thread in self.threads:
+                        thread.join()
 
 
 	def enumerateAlbum(self, albumId):
