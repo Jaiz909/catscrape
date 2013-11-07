@@ -1,7 +1,6 @@
 catscrape
 =========
-[![Build Status](https://travis-ci.org/Jaiz909/catscrape.png?branch=master)](https://travis-ci.org/Jaiz909/catscrape)
-[![Catscrape](https://badge.fury.io/py/catscrape@2x.png)](https://badge.fury.io/py/catscrape@2x.png)
+|[![Build Status](https://travis-ci.org/Jaiz909/catscrape.png?branch=master)](https://travis-ci.org/Jaiz909/catscrape)|[![Catscrape](https://badge.fury.io/py/catscrape@2x.png)](https://badge.fury.io/py/catscrape@2x.png)|
 
 Multithreaded imgur album downloader. The imgur album download link compiles a zip archive and seems to take a long time
 on some albums. The download link usually doesn't preserve the order of the original album. This simple script will quickly
