@@ -2,16 +2,15 @@
 """
 Author: Jai Grimshaw <jai@jaigrimshaw.com>
 Date: 20130724
-Filename: catscrape.py
+Filename: __main__.py
 """
-
 import argparse
 import logging
-from imgurdownloader import ImgurDownloader
+from extractors.imgur import ImgurEx
 
+logger =logging.getLogger('catscrape')
 
-logger = logging.getLogger('catscrape')
-if __name__ == '__main__':
+def main():
         parser = argparse.ArgumentParser()
         parser.add_argument('-d', dest='debug', action='store_true', help='Enable debugging output', default=False, required=False)
         parser.add_argument('-q', dest='quiet', action='store_true', help='Enable quiet mode', default=False, required=False)
@@ -30,6 +29,9 @@ if __name__ == '__main__':
 
 
         logger.debug('Constructing downloader.')
-        downloader = ImgurDownloader(savePath=args.outdir, numThreads=args.numthreads)
+        downloader = ImgurEx(savePath=args.outdir, numThreads=args.numthreads)
         logger.debug('Starting downloader.')
         downloader.downloadAlbum(url=args.album)
+
+if __name__ == '__main__':
+        main()

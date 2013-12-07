@@ -1,1 +1,1 @@
-import catscrape as catscrape
+import __main__

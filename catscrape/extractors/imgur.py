@@ -13,7 +13,7 @@ import logging
 from bs4 import BeautifulSoup
 logger = logging.getLogger('catscrape')
 
-class ImgurDownloader:
+class ImgurEx:
         def __init__(self, savePath='.', numThreads=10):
                 self.images = list()
                 self.threads = list()
@@ -21,7 +21,8 @@ class ImgurDownloader:
 
                 self.albumPath = savePath
 
-                self.imgurURLRegex = re.compile('(http\:\/\/)?(\/\/)?(?P<fullURL>i\.imgur\.com\/(?P<filename>(?P<imageID>[a-zA-Z0-9]+)\.(?P<ext>jpg|jpeg|png|gif)))')
+                self.imgurImageURLRegex = re.compile('(http\:\/\/)?(\/\/)?(?P<fullURL>i\.imgur\.com\/(?P<filename>(?P<imageID>[a-zA-Z0-9]+)\.(?P<ext>jpg|jpeg|png|gif)))')
+                self.imgurAlbumURLRegex = re.compile('http\:\/\/(www\.)?imgur\.com/a/([a-zA-Z0-9]+)(#[0-9]+)?')
 
                 #Prep threads. Start them after populating self.images
                 for i in range(0, self.numThreads):
@@ -29,8 +30,22 @@ class ImgurDownloader:
                         thread = threading.Thread(target=self.downloadImage)
                         self.threads.append(thread)
 
+
+        def check_url(self, url):
+            """
+            Checks if this extractor can handle a url.
+            @param url: The url to be tested.
+            @returns: True if the url can be handled. False otherwise.
+            """
+            match = self.imgurAlbumURLRegex.match(url)
+            if match is None:
+                return False
+            else:
+                return True
+            
+
         def downloadAlbum(self, url):
-                match = re.match('http\:\/\/(www\.)?imgur\.com/a/([a-zA-Z0-9]+)(#[0-9]+)?', url)
+                match = self.imgurAlbumURLRegex.match(url)
                 if match is None:
                         logger.error('URL does not match expected URL pattern.')
                         return None
@@ -75,7 +90,7 @@ class ImgurDownloader:
                                 logger.warning('Image \'%s\' does not contain a src attribute. Skipping image.', str(image))
                                 return
 
-                        match = re.match(self.imgurURLRegex, imageLink)
+                        match = re.match(self.imgurImageURLRegex, imageLink)
                         imageMatches.append(match)
 
                 #Use a count to preserve the order of the album.
