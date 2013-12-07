@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, find_packages
 import sys
 try:
         import py2exe
@@ -30,11 +30,11 @@ setup(name='catscrape',
         install_requires=[
                 'beautifulsoup4',
         ],
-        packages=['catscrape'],
+        packages=find_packages(),
         scripts=['bin/catscrape'],
         entry_points= {
-                'console_scripts': ['catscrape=catscrape.__main__.main'],
+                'console_scripts': ['catscrape=catscrape.__main__:main'],
         },
-        zip_safe=True,
+        zip_safe=False,
         **opts
 )

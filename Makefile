@@ -4,10 +4,13 @@ install: catscrape setup.py
 develop: catscrape setup.py
 	./setup.py develop
 
-test:
+dependencies: requirements.txt
+	pip install -r requirements.txt
+
+test: dependencies
 	nosetests
 
-zip: catscrape
+zip: catscrape dependencies
 	mkdir -p dist
 	echo '#!/usr/bin/env python' > dist/catscrape
 	cd catscrape && zip -r ../dist/catscrape.zip *
@@ -15,3 +18,8 @@ zip: catscrape
 	rm dist/catscrape.zip
 	chmod +x dist/catscrape
 
+binary: zip dependencies
+	echo "Building binary"
+
+clean:
+	rm -rf dist
