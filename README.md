@@ -1,15 +1,24 @@
-catscrape
+Catscrape
 =========
 [![Build Status](https://travis-ci.org/Jaiz909/catscrape.png?branch=master)](https://travis-ci.org/Jaiz909/catscrape)
 
 Multithreaded imgur album downloader. The imgur album download link compiles a zip archive and seems to take a long time
-on some albums. The download link usually doesn't preserve the order of the original album. This simple script will quickly
+on some albums. The download link usually doesn't preserve the order of the original album. Catscrape will quickly
 pull images from an imgur album into a new directory, preserving the order of the album.
+
+Requirements
+--------
+* Python 2.7, 3.2 or 3.3
+* Beautifulsoup 4 (Will be installed automatically if it isn't present)
+
+Installation
+--------
+Run either `make install` or `python setup.py install` as root.
 
 Usage
 --------
 ```
-usage: catscrape.py [-h] -a ALBUM [-o OUTDIR] [-n NUMTHREADS]
+usage: catscrape [-h] [-d] [-q] -a ALBUM [-o OUTDIR] [-n NUMTHREADS]
 
 optional arguments:
   -h, --help     show this help message and exit
