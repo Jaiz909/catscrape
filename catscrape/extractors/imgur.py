@@ -51,7 +51,7 @@ class ImgurEx:
                         return None
                 self.albumPath = os.path.abspath(os.path.join(self.albumPath, match.group(2)))
                 try:
-                        os.mkdir(self.albumPath)
+                        os.makedirs(self.albumPath)
                 except OSError as e:
                         logger.warning('Exception thrown when creating album directory: \'%s\'', str(e))
                 self.enumerateAlbum(match.group(2))
