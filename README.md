@@ -9,24 +9,30 @@ pull images from an imgur album into a new directory, preserving the order of th
 Requirements
 --------
 * Python 2.7, 3.2 or 3.3
-* Beautifulsoup 4 (Will be installed automatically if it isn't present)
 
 Installation
 --------
-Run either `make install` or `python setup.py install` as root.
+Run either `make install` or `python setup.py install`.
 
 Usage
 --------
 ```
-usage: catscrape [-h] [-d] [-q] -a ALBUM [-o OUTDIR] [-n NUMTHREADS]
+usage: catscrape [-h] [-d] [-q] [-o OUT_DIR] [-n NUM_THREADS] [-c CONFIG_PATH]
+                 ALBUM [ALBUM ...]
+
+positional arguments:
+  ALBUM                 The imgur album urls to download images from.
 
 optional arguments:
-  -h, --help     show this help message and exit
-  -d             Enable debugging output
-  -q             Enable quiet mode
-  -a ALBUM       The imgur album url to download images from.
-  -o OUTDIR      The directory to save images to. Defaults to the album id in
-                 the current working directory.
-  -n NUMTHREADS  The number of threads to use for downloading. Default=10.
-
+  -h, --help            show this help message and exit
+  -d, --debug           Enable debugging output
+  -q, --quiet           Enable quiet mode
+  -o OUT_DIR, --out-dir OUT_DIR
+                        The directory to save images to. Defaults to the album
+                        id in the current working directory.
+  -n NUM_THREADS, --num-threads NUM_THREADS
+                        The number of threads to use for downloading.
+                        Default=10.
+  -c CONFIG_PATH, --conf-file CONFIG_PATH
+                        The path to the configuration file.
 ```

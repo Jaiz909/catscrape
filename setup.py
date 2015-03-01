@@ -24,11 +24,11 @@ else:
         opts = {}
 
 setup(name='catscrape',
-        version='0.1',
+        version='0.2',
         author='Jai Grimshaw',
         license='MIT',
         install_requires=[
-                'beautifulsoup4',
+                'imgurpython',
         ],
         packages=find_packages(),
         scripts=['bin/catscrape'],
