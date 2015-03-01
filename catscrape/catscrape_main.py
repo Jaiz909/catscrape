@@ -5,7 +5,10 @@ import os
 import sys
 import urllib
 from threading import Thread
-import Queue
+try:
+    import Queue as queue
+except ImportError:
+    import queue as queue
 try:
     import configparser
 except ImportError:
@@ -17,7 +20,7 @@ logger = logging.getLogger('catscrape')
 class ThreadPool(object):
     def __init__(self, size):
         self.threads = list()
-        self.work_queue = Queue.Queue()
+        self.work_queue = queue.Queue()
         for _ in range(size):
             self.threads.append(Thread(target=self.do_work))
 
@@ -30,7 +33,7 @@ class ThreadPool(object):
                 args = self.work_queue.get(False)
                 download_image(**args)
                 self.work_queue.task_done()
-        except Queue.Empty:
+        except queue.Empty:
             # Nothing left to do
             pass
 
